@@ -16,8 +16,15 @@ int main() {
 
   initMotors();  // Configure motor pins for output
 
-  /* 1. Open-loop response.
-   *    Uncomment the code below to test your motors and encoders. */
+  // 1. Open-loop response
+  testOpenLoop();
+
+  // 2. Closed-loop step response
+  //testClosedLoop(5000);
+}
+
+// Test functions for open-loop and closed-loop motor control
+void testOpenLoop() {
   while (true) {
     motorOn(LMOTOR, 255);  // Change the speeds and direction to test
     motorOn(RMOTOR, 255);
@@ -25,25 +32,31 @@ int main() {
     Serial.print(" ");
     Serial.println(enc_r.read());
   }
+}
 
+/**
+ * Test closed-loop behavior with repeated step responses.
+ *
+ * @param desired_speed Target speed for both motors in ticks/sec.
+ * @param step_duration Duration of each step in milliseconds.
+ */
+void testClosedLoop(int desired_speed, int step_duration) {
+  long step_start_time;
+  long step_end_time;
 
-  /* 2. Closed-loop step response
-   *    Uncomment the code below to test your PID controller step response. */
-  // long step_start_time;
-  // while (true) {
+  while (true) {
 
-  //   // Run step response for 5 seconds
-  //   resetPID();
-  //   step_start_time = millis();
-  //   while ((millis() - step_start_time) < 5000) {
-  //     updatePID(1500, 1500, true);
-  //   }
+    // Command constant speed for specified duration
+    resetPID();
+    step_start_time = millis();
+    while ((millis() - step_start_time) < step_duration) {
+      updatePID(desired_speed, desired_speed, true);
+    }
 
-  //   // Stop motors
-  //   updatePID(0, 0, false);
-  //   motorHalt(LMOTOR);
-  //   motorHalt(RMOTOR);
-
-  //   delay(1000);  // Wait 1 second
-  // }
+    // Stop motors for 1 second
+    step_end_time = millis();
+    while ((millis() - step_end_time) < 1000) {
+      updatePID(0, 0, true);
+    }
+  }
 }
