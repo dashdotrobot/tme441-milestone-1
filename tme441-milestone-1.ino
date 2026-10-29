@@ -17,17 +17,22 @@ int main() {
   initMotors();  // Configure motor pins for output
 
   // 1. Open-loop response
-  testOpenLoop();
+  testOpenLoop(255, 255);
 
   // 2. Closed-loop step response
   //testClosedLoop(5000);
 }
 
-// Test functions for open-loop and closed-loop motor control
-void testOpenLoop() {
+/**
+ * Test open-loop motor control.
+ *
+ * @param l_motor_speed Speed for the left motor (-255 to +255)
+ * @param r_motor_speed Speed for the right motor (-255 to +255)
+ */
+void testOpenLoop(int l_motor_speed, int r_motor_speed) {
   while (true) {
-    motorOn(LMOTOR, 255);  // Change the speeds and direction to test
-    motorOn(RMOTOR, 255);
+    motorOn(LMOTOR, l_motor_speed);
+    motorOn(RMOTOR, r_motor_speed);
     Serial.print(enc_l.read());
     Serial.print(" ");
     Serial.println(enc_r.read());
