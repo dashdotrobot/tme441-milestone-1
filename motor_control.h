@@ -7,14 +7,14 @@
 
 // Define motor control pins
 #define RMOTOR 0
-#define RMOTOR_DIR_A 8
-#define RMOTOR_DIR_B 9
-#define RMOTOR_SPD 10
+#define RMOTOR_SPD 8
+#define RMOTOR_DIR_A 9
+#define RMOTOR_DIR_B 10
 
 #define LMOTOR 1
+#define LMOTOR_SPD 5
 #define LMOTOR_DIR_A 6
 #define LMOTOR_DIR_B 7
-#define LMOTOR_SPD 5
 
 // Define PID options
 #define PID_INT 20       // PID update interval [ms]
@@ -36,8 +36,8 @@ long last_speed_l = 0;  // Previous measured speed [steps/sec]
 long last_speed_r = 0;
 
 // Attach encoders
-Encoder enc_r(19, 18);  // Change pin numbers to match your own circuit
-Encoder enc_l(21, 20);
+Encoder enc_r(18, 19);  // Change pin numbers to match your own circuit
+Encoder enc_l(20, 21);
 
 // Initialize motors
 void initMotors() {
