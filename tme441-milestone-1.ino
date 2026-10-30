@@ -33,8 +33,9 @@ void testOpenLoop(int l_motor_speed, int r_motor_speed) {
   while (true) {
     motorOn(LMOTOR, l_motor_speed);
     motorOn(RMOTOR, r_motor_speed);
+    Serial.print("L: ");
     Serial.print(enc_l.read());
-    Serial.print(" ");
+    Serial.print(", R: ");
     Serial.println(enc_r.read());
   }
 }
