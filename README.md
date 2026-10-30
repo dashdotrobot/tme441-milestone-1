@@ -6,8 +6,7 @@ The project includes basic motor control and a PID speed controller.
 ## Project files
 
 - `tme441-milestone-1.ino` — Arduino sketch and selectable motor-control tests.
-- `motor_control.h` — motor pin assignments, encoder instances, motor helpers,
-  and PID implementation.
+- `motor_control.h` — motor pin assignments, `Motor` class, and PID implementation.
 
 ## Requirements
 
@@ -71,6 +70,9 @@ Test your open-loop response to make sure the motors turn the correct direction 
 
 The controller is implemented in `motor_control.h`:
 
+- Each motor is represented by a `Motor` object with its encoder. Encoder
+  pins are supplied to the `Motor` constructor. The object provides `init()`,
+  `on(speed)`, `halt()`, and `readEncoder()` methods.
 - `K_P`, `K_I`, and `K_D` are the proportional, integral, and derivative gains.
 - `PID_INT` sets the update interval in milliseconds.
 - `PID_REP_INT` sets the reporting interval in milliseconds.

@@ -6,7 +6,6 @@
 *  @authors YourNamesHere
 *  @team YourTeamNameHere
 */
-#include <Encoder.h>
 #include "motor_control.h"
 
 
@@ -14,7 +13,8 @@ int main() {
   init();
   Serial.begin(9600);
 
-  initMotors();  // Configure motor pins for output
+  motor_l.init();
+  motor_r.init();
 
   // 1. Open-loop response
   testOpenLoop(255, 255);
@@ -31,12 +31,12 @@ int main() {
  */
 void testOpenLoop(int l_motor_speed, int r_motor_speed) {
   while (true) {
-    motorOn(LMOTOR, l_motor_speed);
-    motorOn(RMOTOR, r_motor_speed);
+    motor_l.on(l_motor_speed);
+    motor_r.on(r_motor_speed);
     Serial.print("L: ");
-    Serial.print(enc_l.read());
+    Serial.print(motor_l.readEncoder());
     Serial.print(", R: ");
-    Serial.println(enc_r.read());
+    Serial.println(motor_r.readEncoder());
   }
 }
 
