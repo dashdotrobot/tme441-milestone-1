@@ -9,21 +9,6 @@ The project includes basic motor control and a PID speed controller.
 - `motor_control.h` — motor pin assignments, encoder instances, motor helpers,
   and PID implementation.
 
-## Hardware and wiring
-
-The pin assignments are defined in `motor_control.h`:
-
-| Component | Arduino pins |
-| --- | --- |
-| Left motor direction | 6, 7 |
-| Left motor speed (PWM) | 5 |
-| Right motor direction | 8, 9 |
-| Right motor speed (PWM) | 10 |
-| Left encoder | 21, 20 |
-| Right encoder | 19, 18 |
-
-The encoder and motor pin numbers may need to be changed to match the robot's wiring.
-
 ## Requirements
 
 - Arduino IDE or another Arduino-compatible build/upload environment.
